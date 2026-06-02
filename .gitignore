@@ -1,0 +1,19 @@
+# CRITICAL: Never upload environment variables
+.env
+backend/.env
+frontend/.env
+
+# Node Modules (These are huge and should be installed locally, not uploaded)
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Frontend Build Output
+frontend/dist/
+
+# IDE Configuration Files
+.vscode/
+
+# OS Generated Files
+.DS_Store
+Thumbs.db

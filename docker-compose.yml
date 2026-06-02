@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # Backend Service
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env  # Pulls all keys for Gemini, Cloudinary, Nodemailer, etc.
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+    # Required for Socket.io real-time stability
+    restart: unless-stopped 
+
+  # Frontend Service
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    environment:
+      # Ensures the Vite frontend talks to the Dockerized backend
+      - VITE_API_URL=http://localhost:5000 
+    depends_on:
+      - backend
+    networks:
+      - app-network
+    # Hot-reloading support for Windows
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+  # Local Database Service (Optional if using Atlas)
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo-data:

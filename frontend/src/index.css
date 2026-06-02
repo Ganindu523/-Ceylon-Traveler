@@ -1,0 +1,94 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+@theme {
+  --color-primary: #059669;
+  --color-primary-dark: #065f46;
+  --color-secondary: #fbbf24;
+  --color-accent: #10b981;
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+  
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-luxury: "Playfair Display", serif;
+
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+}
+
+/* Base Styles */
+body {
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+/* Components */
+@layer components {
+  .glass-card {
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    @apply shadow-xl;
+  }
+  
+  .btn-primary {
+    @apply bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-2xl 
+           shadow-lg shadow-emerald-200 transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer;
+  }
+  
+  .btn-secondary {
+    @apply bg-white hover:bg-slate-50 text-emerald-600 font-bold py-3 px-8 rounded-2xl 
+           border border-emerald-100 shadow-sm transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer;
+  }
+  
+  .input-field {
+    @apply w-full bg-white/50 border border-slate-200 rounded-2xl px-5 py-4 focus:ring-2 
+           focus:ring-emerald-500 focus:border-transparent outline-none transition-all;
+  }
+}
+
+/* Utilities */
+@layer utilities {
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-500;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a7f3d0;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6ee7b7;
+}
